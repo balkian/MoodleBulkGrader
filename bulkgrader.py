@@ -1,44 +1,10 @@
 '''
-This tool makes it easier to grade Moodle submissions that were originally
-made as individual image/pdf uploads.
-
-It will merge the individual files into single PDF per student.
-That PDF can then be annotated, with general comments or with special comments
-that will be used to calculate the marks for the submission.
-Special annotations start with a specific first line, and are followed by
-lines with the name of the section graded and the points awarded for that section.
-
-For instance, consider this annotation:
-
-GRADE
-1.1 0.5
-1.2 1.0
-2 8.5
-
-This will result in the user getting 10 marks. The results are stored
-per section (1.1, 1.2 and 2).
-The bulk grading feature will show how many submissions have a grade for
-each specific section.
-
-You may specify the sections in advance. When all the sections have a grade
-for a specific student, that student will count as fully graded.
-
-Other text annotations can later be extracted as comments for the submission,
-but they are not used in this version.
-
-Instructions:
-- Download all submissions to an assignment as a zip file
-- Extract all submissions
-- Run `python bulkgrader.py --copy` to copy all files
-- Run `python bulkgrader.py --merge` to merge all files. You might need
-to manually add file extensions (`.jpg` or `.pdf`)
-- Run `python bulkgrader.py` to start autograding with your program of choice
-
-For every PDF, you'll want to add
-
 @author Fernando Sánchez (jf.sanchez, balkian) UPM
 
+See README.md
+
 '''
+import sys
 import os
 import pathlib
 import argparse
@@ -47,9 +13,6 @@ import mimetypes
 
 from collections import defaultdict
 
-import poppler
-import sys
-import urllib
 
 from glob import glob
 
@@ -66,7 +29,7 @@ SECTIONS = set(os.environ.get('SECTIONS', SECTIONS).split(' '))
 PDFVIEWER = os.environ.get('PDFVIEWER', 'evince')
 LABELS = ['NOTA', 'GRADE']
 
-def copy():
+def copy_all():
     '''Copia 
     '''
     for submission in os.listdir(submissions):
@@ -225,7 +188,7 @@ if __name__ == '__main__':
     reviews = pathlib.Path(args.reviews_path)
     submissions = pathlib.Path(args.submissions_path)
     if args.copy:
-        copy()
+        copy_all()
     if args.merge:
         create_pdfs()
     calculate(grade=not args.no_grade,
