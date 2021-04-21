@@ -11,10 +11,12 @@ and they are followed by a new line per section.
 
 For instance, consider this annotation:
 
+```
 GRADE
 1.1 0.5
 1.2 1.0
 2 8.5
+```
 
 This will result in the user getting 10 marks.
 The results are stored per section (1.1, 1.2 and 2).
