@@ -18,10 +18,11 @@ GRADE
 2 8.5
 ```
 
-This will result in the user getting 10 marks.
-The results are stored per section (1.1, 1.2 and 2).
+The student will get 10 marks (0.5+1.0+8.5)
+The results are stored per section (1.1, 1.2 and 2), so you can keep
+track of your progress.
 The bulk grading feature will show how many submissions have a grade for
-each specific section, so you can keep track of your progress.
+each specific section,
 
 You may add more than one `grading` annotation per document.
 If the same section is graded more than once, `bulkgrader` will raise an 
